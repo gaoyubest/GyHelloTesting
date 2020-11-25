@@ -32,9 +32,9 @@ E:\ProgramFiles\ChromeDriver
 chromedriver
 ```
 
-![查看chrome版本](./images/010_chrome版本.png)
-![找到对应版本](./images/011_chrome版本.png)
-![查看是否配置成功](./images/011_chrome.png)
+![](./images/010_chrome版本.png)
+![](./images/011_chrome版本.png)
+![](./images/011_chrome.png)
 
 ### 2、安装 Maven
 
@@ -53,13 +53,13 @@ chromedriver
 mvn -v
 ```
 
-![检测安装是否成功](images/012_maven1.png)
+![](images/012_maven1.png)
 
 ## 二、创建项目
 
 ### 1、创建空的Maven项目
 
-![创建项目内容](./images/014maven3.png)
+![](./images/014maven3.png)
 
 ### 2、添加dependency
 
@@ -71,10 +71,10 @@ mvn -v
 
 [查找dependency链接https://mvnrepository.com/](https://mvnrepository.com/)
 
-![查找依赖](./images/016_maven.png)
-![搜索依赖](./images/015_maven.png)
-![搜索依赖](./images/017_maven.png)
-![加载依赖](./images/018_maven.png)
+![](./images/016_maven.png)
+![](./images/015_maven.png)
+![](./images/017_maven.png)
+![](./images/018_maven.png)
 
 ### 3、创建main函数
 
@@ -121,4 +121,4 @@ public class seleniumBaidu {
 > 4、返回搜索结果页面；
 > 5、Chrome 浏览器自动退出。
 
-![测试成功](./images/019_maven.png)
+![](./images/019_maven.png)
