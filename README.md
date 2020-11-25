@@ -1,1 +1,1 @@
-[Viwenotes](https://gaoyubest.github.io/GyHelloTesting/)
+[ViewNotes](https://gaoyubest.github.io/GyHelloTesting/)
