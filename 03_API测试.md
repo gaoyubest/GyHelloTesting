@@ -145,3 +145,184 @@ cURL 只能发起 API 调用，而其本身并不具备结果验证能力（结�
 ![](./images/032_Postman使用1.png)
 
 ![](./images/032_Postman使用2.png)
+
+### 3、Postman测试例子
+
+#### （1）发起API调用
+
+- endpoint 输入框中输入http://127.0.0.1:8080/account/ID_008
+- 选择GET方法
+- 点击Send按钮，发起API调用
+
+![](./images/032_Postman使用3.png)
+![](./images/032_Postman使用4.png)
+
+- 返回的response默认以JSON文件的形式显示在Body中。
+
+#### （2）添加结果验证
+
+假定我们在 Account API 测试过程中有以下四个验证点：
+
+- 请求的返回状态码（Status Code）应该是 200；
+- 请求的响应时间应该小于 200 ms；
+- 请求返回的 response header 中应该包含“Content-Type”参数；
+- 请求返回的 response body 中，“type”的值应该是“friends”；
+
+打开Test界面，点击SNIPPETS依次点击，自动生成代码：
+
+- Status code: Code is 200
+- Response time is less than 200 ms
+- Response headers：Content-Type header check
+- Response body: JSON value check
+- 只修改代码13、15行即可
+
+![](./images/032_Postman使用5.png)
+
+测试通过：
+
+![](./images/032_Postman使用6.png)
+
+#### （3）保存测试用例
+
+- Collection 来分类管理保存多个测试 request
+- Save As 保存到Collection即可
+
+#### （4）基于Postman的测试代码自动生成
+
+![](./images/032_Postman使用7.png)
+
+- 将Postman中的Collection导出为JSON文件
+
+![](./images/032_Postman使用8.png)
+![](./images/032_Postman使用9.png)
+
+利用 Newman 工具直接执行 Postman 的 Collection
+
+```bash
+newman run examples/sample-collection.json;
+```
+
+### 五、安装newman
+
+#### 1、安装nodejs
+
+[点击此链接下载nodejs](http://nodejs.cn/download/)
+
+- nodejs下载直接安装即可
+
+```bash
+# 查看是否安装成功
+node -v
+
+# 结果
+C:\Users\Gaoyu>node -v
+v14.15.1
+```
+
+#### 2、安装newman
+
+```bash
+npm install newman -global
+
+C:\Users\Gaoyu>npm install newman -global
+npm WARN deprecated har-validator@5.1.5: this library is no longer supported
+C:\Users\Gaoyu\AppData\Roaming\npm\newman -> C:\Users\Gaoyu\AppData\Roaming\npm\node_modules\newman\bin\newman.js
++ newman@5.2.1
+added 157 packages from 199 contributors in 135.501s
+
+# 查看是否安装成功
+C:\Users\Gaoyu>newman -v
+5.2.1
+
+# 其他运行参数
+C:\Users\Gaoyu>newman -h
+Usage: newman [options] [command]
+
+Options:
+  -v, --version               output the version number
+  -h, --help                  display help for command
+
+Commands:
+  run [options] <collection>  Initiate a Postman Collection run from a given URL or path
+
+To get available options for a command:
+  newman <command> -h
+
+C:\Users\Gaoyu>newman --help
+Usage: newman [options] [command]
+
+Options:
+  -v, --version               output the version number
+  -h, --help                  display help for command
+
+Commands:
+  run [options] <collection>  Initiate a Postman Collection run from a given URL or path
+
+To get available options for a command:
+  newman <command> -h
+```
+
+#### 3、newman使用
+
+- 找到Postman 的 Collection所在最小文件夹，按shift+右键，在此处打开Powershell
+![](./images/033_newman使用1.png)
+
+```bash
+输入cmd 
+
+PS G:\HelloMD\GyHelloTesting> cmd
+Microsoft Windows [版本 10.0.18363.1198]
+(c) 2019 Microsoft Corporation。保留所有权利。
+
+newman run 加文件路径
+# 文件路劲方法：输入 newman run api 后按Tab键自动补上当前文件夹中的api名字
+
+G:\HelloMD\GyHelloTesting\TestDemo>newman run "API Test Demo.postman_collection.json"
+newman: Newman v4 deprecates support for the v1 collection format
+  Use the Postman Native app to export collections in the v2 format
+
+newman
+
+API Test Demo
+
+→ AccountAPI
+  GET http://127.0.0.1:8080/account/ID_008 [200 OK, 183B, 66ms]
+  √  Status code is 200
+  √  Response time is less than 200ms
+  √  Content-Type is present
+  √  My test asseret 001: type should be 'friends'
+
+┌─────────────────────────┬──────────────────┬──────────────────┐
+│                         │         executed │           failed │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│              iterations │                1 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│                requests │                1 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│            test-scripts │                1 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│      prerequest-scripts │                0 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│              assertions │                4 │                0 │
+├─────────────────────────┴──────────────────┴──────────────────┤
+│ total run duration: 151ms                                     │
+├───────────────────────────────────────────────────────────────┤
+│ total data received: 53B (approx)                             │
+├───────────────────────────────────────────────────────────────┤
+│ average response time: 66ms [min: 66ms, max: 66ms, s.d.: 0µs] │
+└───────────────────────────────────────────────────────────────┘
+```
+
+### 六、典型复杂场景
+
+- 测试场景一：被测业务操作是由多个 API 调用协作完成
+解决这个问题的核心思路是，通过网络监控的手段，捕获单个前端操作所触发的 API 调用序列。比如，通过类似于 Fiddler 之类的网络抓包工具，获取这个调用序列；又比如，目前很多互联网公司还在考虑基于用户行为日志，通过大数据手段来获取这个序列。
+
+
+- 测试场景二：API 测试过程中的第三方依赖
+解决这个问题的核心思路是，启用 Mock Server 来代替真实的 API
+
+- 测试场景三：异步 API 的测试
+
+> 异步 API 是指，调用后会立即返回，但是实际任务并没有真正完成，而是需要稍后去查询或者回调（Callback）的 API。
+
