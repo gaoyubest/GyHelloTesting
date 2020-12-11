@@ -1,0 +1,83 @@
+{
+	"id": "4f2c2dbd-cce0-4f81-82f6-79544afbae4e",
+	"name": "API Test Demo",
+	"description": "极客时间22_API测试",
+	"auth": null,
+	"events": null,
+	"variables": [],
+	"order": [
+		"5cedc74f-46c9-4529-9981-28a82efe5ddd"
+	],
+	"folders_order": [],
+	"protocolProfileBehavior": {},
+	"folders": [],
+	"requests": [
+		{
+			"id": "5cedc74f-46c9-4529-9981-28a82efe5ddd",
+			"name": "AccountAPI",
+			"url": "http://127.0.0.1:8080/account/ID_008",
+			"description": "http://127.0.0.1:8080/account/ID_008",
+			"data": [],
+			"dataOptions": {
+				"raw": {
+					"language": "text"
+				}
+			},
+			"dataMode": "graphql",
+			"headerData": null,
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "x",
+					"value": "22",
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "y",
+					"value": "33",
+					"description": "",
+					"enabled": false
+				}
+			],
+			"auth": null,
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e0138e55-9ab4-440c-908b-48e265444bc8",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"My test asseret 001: type should be 'friends'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.type).to.eql(\"friends\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"folder": null,
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"graphqlModeData": {
+				"query": "",
+				"variables": ""
+			},
+			"pathVariables": {}
+		}
+	]
+}
