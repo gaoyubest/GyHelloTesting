@@ -46,9 +46,12 @@ C:\Users>java -verbose
 
 ![](./images/07_JMter用户变量.png)
 
-3、系统变量path后面加上%JMETER_HOME%\bin
-
+3、系统变量path后面加上
+```bash
+%JMETER_HOME%\bin
+```
 ![](./images/07_JMter系统变量2.png)
+
 
 创建完成之后点击“确定”即可
 

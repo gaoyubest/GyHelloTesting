@@ -13,3 +13,11 @@ F12可看到浏览器的信息
 
 JMeter汉化：
 ![](./../images/07_JeMter语言.png)
+
+JMeter察看结果树—CSS JQuery查找特定值：
+- Selector->test
+
+```bash
+div[div[class="article-title-box"]]
+```
+![](./../images/07_JMeter_CSS.png)
